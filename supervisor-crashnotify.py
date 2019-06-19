@@ -292,7 +292,7 @@ class CrashNotify:
     def dingrobot(self, token, subject, msg):
         webhook = 'https://oapi.dingtalk.com/robot/send?access_token=%s' % token
         bot = DingtalkChatbot(webhook)
-        bot.send_markdown(title=subject, text=msg, is_at_all=true)
+        bot.send_markdown(title=subject, text=msg, is_at_all=True)
 
 def main(argv=sys.argv):
     # 参数解析
