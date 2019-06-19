@@ -267,14 +267,13 @@ class CrashNotify:
 def main(argv=sys.argv):
     # 参数解析
     import getopt
-    short_args = "hp:ao:s:m:"
+    short_args = "hp:ao:t:"
     long_args = [
         "help",
         "program=",
         "any",
-        "optionalheader="
-        "sendmail_program=",
-        "email=",
+        "optionalheader=",
+        "access_token="
     ]
     arguments = argv[1:]
     try:
@@ -284,8 +283,6 @@ def main(argv=sys.argv):
 
     programs = []
     any = False
-    sendmail = '/usr/sbin/sendmail -t -i'
-    email = None
     optionalheader = None
 
     for option, value in opts:
@@ -302,7 +299,7 @@ def main(argv=sys.argv):
         if option in ('-o', '--optionalheader'):
             optionalheader = value
 
-        if option in ('-t', '--token'):
+        if option in ('-t', '--access_token'):
             token = value
 
     # listener 必须交由 supervisor 管理, 自己运行是不行的
