@@ -264,8 +264,6 @@ class CrashNotify:
         bot = DingtalkChatbot(webhook)
         bot.send_markdown(title=subject, text=msg, is_at_all=True)
 
-
-
 def main(argv=sys.argv):
     # 参数解析
     import getopt
