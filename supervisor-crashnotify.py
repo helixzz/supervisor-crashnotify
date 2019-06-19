@@ -274,7 +274,7 @@ class CrashNotify:
             hostname = socket.gethostname()
             
             # 构造报警内容
-            msg = "- Host: %s \n - Process: %s \n - PID: %s \n - EXITED unexpectedly from state: %s" % \
+            msg = "- Host: %s \n - Process: %s \n - PID: %s \n - EXITED unexpectedly from state: %s \n - At Time: %s" % \
                   (hostname, pheaders['processname'], pheaders['pid'], pheaders['from_state'], childutils.get_asctime())
 
             subject = 'Supervisor alert: %s crashed' % (pheaders['processname'])
