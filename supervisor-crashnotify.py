@@ -51,7 +51,8 @@ crashnotify.py -p program1 -p group1:program2 -t abcdefghijkl
 """
 
 def usage():
-    print doc
+    print 'parameter error'
+#    print doc
     sys.exit(255)
 
 def is_not_null_and_blank_str(content):
