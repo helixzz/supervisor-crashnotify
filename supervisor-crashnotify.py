@@ -290,7 +290,7 @@ class CrashNotify:
             # 向 stdout 写入"RESULT\nOK"，并进入下一次循环
             childutils.listener.ok(self.stdout)
 
-    def dingrobot(token, subject, msg):
+    def dingrobot(self, token, subject, msg):
         webhook = 'https://oapi.dingtalk.com/robot/send?access_token=%s' % token
         bot = DingtalkChatbot(webhook)
         bot.send_markdown(title=subject, text=msg, is_at_all=True)
