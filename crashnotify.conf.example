@@ -1,0 +1,3 @@
+[eventlistener:crashnotify]
+command=/usr/bin/python /opt/supervisor-crashnotify/supervisor-crashnotify.py -a -t <access_token>
+events=PROCESS_STATE_EXITED
