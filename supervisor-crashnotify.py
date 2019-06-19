@@ -272,13 +272,12 @@ class CrashNotify:
                 continue
 
             hostname = socket.gethostname()
-            ip = socket.gethostbyname(hostname)
+            
             # 构造报警内容
-            msg = "Host: %s(%s)\nProcess: %s\nPID: %s\nEXITED unexpectedly from state: %s" % \
-                  (hostname, ip, pheaders['processname'], pheaders['pid'], pheaders['from_state'])
+            msg = "- Host: %s\n- Process: %s\n- PID: %s\n- EXITED unexpectedly from state: %s" % \
+                  (hostname, pheaders['processname'], pheaders['pid'], pheaders['from_state'], childutils.get_asctime())
 
-            subject = 'Supervisor alert: %s crashed at %s' % (pheaders['processname'],
-                                             childutils.get_asctime())
+            subject = 'Supervisor alert: %s crashed' % (pheaders['processname'])
             if self.optionalheader:
                 subject = '[' + self.optionalheader + ']' + subject
 
@@ -293,7 +292,7 @@ class CrashNotify:
     def dingrobot(self, token, subject, msg):
         webhook = 'https://oapi.dingtalk.com/robot/send?access_token=%s' % token
         bot = DingtalkChatbot(webhook)
-        bot.send_markdown(title=subject, text=msg, is_at_all=True)
+        bot.send_markdown(title=subject, text=msg, is_at_all=true)
 
 def main(argv=sys.argv):
     # 参数解析
@@ -303,7 +302,7 @@ def main(argv=sys.argv):
         "help",
         "program=",
         "any",
-        "optionalheader=",
+        "optional_header=",
         "access_token="
     ]
     arguments = argv[1:]
@@ -327,7 +326,7 @@ def main(argv=sys.argv):
         if option in ('-a', '--any'):
             any = True
 
-        if option in ('-o', '--optionalheader'):
+        if option in ('-o', '--optional_header'):
             optionalheader = value
 
         if option in ('-t', '--access_token'):
