@@ -20,6 +20,36 @@ try:
 except AttributeError:
     JSONDecodeError = ValueError
 
+# Usage
+doc = """\
+crashnotify.py [-p process_name] [-a] [-o string] [-t access_token]
+              URL
+
+Options:
+
+-p -- specify a supervisor process_name.  Send mail when this process
+      transitions to the EXITED state unexpectedly. If this process is
+      part of a group, it can be specified using the
+      'process_name:group_name' syntax.
+
+-a -- Send mail when any child of the supervisord transitions
+      unexpectedly to the EXITED state unexpectedly.  Overrides any -p
+      parameters passed in the same crashnotify process invocation.
+
+-o -- Specify a parameter used as a prefix in the mail subject header.
+
+-t -- Specify Dingtalk robot's access token.
+
+The -p option may be specified more than once, allowing for
+specification of multiple processes.  Specifying -a overrides any
+selection of -p.
+
+A sample invocation:
+
+crashnotify.py -p program1 -p group1:program2 -t abcdefghijkl
+
+"""
+
 def usage():
     print doc
     sys.exit(255)
@@ -317,32 +347,4 @@ if __name__ == '__main__':
     main()
 
 
-# Usage
-doc = """\
-crashnotify.py [-p process_name] [-a] [-o string] [-t access_token]
-              URL
 
-Options:
-
--p -- specify a supervisor process_name.  Send mail when this process
-      transitions to the EXITED state unexpectedly. If this process is
-      part of a group, it can be specified using the
-      'process_name:group_name' syntax.
-
--a -- Send mail when any child of the supervisord transitions
-      unexpectedly to the EXITED state unexpectedly.  Overrides any -p
-      parameters passed in the same crashnotify process invocation.
-
--o -- Specify a parameter used as a prefix in the mail subject header.
-
--t -- Specify Dingtalk robot's access token.
-
-The -p option may be specified more than once, allowing for
-specification of multiple processes.  Specifying -a overrides any
-selection of -p.
-
-A sample invocation:
-
-crashnotify.py -p program1 -p group1:program2 -t abcdefghijkl
-
-"""
