@@ -274,14 +274,14 @@ class CrashNotify:
             hostname = socket.gethostname()
             
             # 构造报警内容
-            msg = "- Host: %s \n - Process: %s \n - PID: %s \n - EXITED unexpectedly from state: %s \n - At Time: %s" % \
+            msg = "检测到进程异常退出。 \n - 主机： %s \n - 进程名： %s \n - PID： %s \n - 原状态： %s \n - 时间： %s" % \
                   (hostname, pheaders['processname'], pheaders['pid'], pheaders['from_state'], childutils.get_asctime())
 
-            subject = 'Supervisor alert: %s crashed' % (pheaders['processname'])
+            subject = 'Supervisor Crash Notify'
             if self.optionalheader:
                 subject = '[' + self.optionalheader + ']' + subject
 
-            self.stderr.write('Unexpected exit detected, sending notification.\n')
+            self.stderr.write('Process %s unexpected exit detected, sending notification.\n' % pheaders['processname'])
             self.stderr.flush()
 
             self.dingrobot(self.token, subject, msg)
