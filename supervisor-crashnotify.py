@@ -274,10 +274,10 @@ class CrashNotify:
             hostname = socket.gethostname()
             
             # 构造报警内容
-            msg = "检测到进程异常退出。 \n - 主机： %s \n - 进程名： %s \n - PID： %s \n - 原状态： %s \n - 时间： %s" % \
+            msg = "# Supervisor 故障通知 \n 检测到进程异常退出，请留意。 \n - 主机名： %s \n - 进程名： %s \n - PID： %s \n - 原状态： %s \n - 时间： %s" % \
                   (hostname, pheaders['processname'], pheaders['pid'], pheaders['from_state'], childutils.get_asctime())
 
-            subject = 'Supervisor Crash Notify'
+            subject = '故障通知：%s' % pheaders['processname']
             if self.optionalheader:
                 subject = '[' + self.optionalheader + ']' + subject
 
